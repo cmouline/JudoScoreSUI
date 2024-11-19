@@ -77,7 +77,7 @@ struct BottomBarView: View {
             }
             
             VictoryView()
-                .hidden(fight.victoryData == nil)
+                .hidden(fight.victoryData == nil || fight.victoryData?.victory == .equal)
 
         }
     }

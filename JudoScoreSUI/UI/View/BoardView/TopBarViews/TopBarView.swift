@@ -21,6 +21,11 @@ struct TopBarView: View {
                 Image(systemName: "line.3.horizontal")
             })
             
+            Text("GS")
+                .hidden(fight.victoryData?.victory != .equal)
+                .font(.custom("LemonMilk", size: 24))
+                .foregroundStyle(.jSyellow)
+            
             Spacer()
             
             TimerView()

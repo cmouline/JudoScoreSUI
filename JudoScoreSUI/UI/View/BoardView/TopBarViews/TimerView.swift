@@ -48,11 +48,13 @@ struct TimerView: View {
             .onChange(of: fight.fighter2.isForfeit)     { fight.isMainTimerRunning = !fight.fighter2.isForfeit && fight.mainTimerRemainingTime != fight.baseTimer }
             .onChange(of: fight.fighter2.isHansokumake) { fight.isMainTimerRunning = !fight.fighter2.isHansokumake && fight.mainTimerRemainingTime != fight.baseTimer }
             .onReceive(fight.generalTimer.timer) { _ in
-                if fight.mainTimerRemainingTime > 0 && fight.isMainTimerRunning {
+                if let victoryData = fight.victoryData, victoryData.victory == .equal, fight.isMainTimerRunning {
+                    fight.mainTimerRemainingTime += 1
+                } else if fight.mainTimerRemainingTime > 0 && fight.isMainTimerRunning {
                     fight.mainTimerRemainingTime -= 1
-                }
-                if fight.mainTimerRemainingTime == 0 {
-                    fight.isTimerFinished = true
+                    if fight.mainTimerRemainingTime == 0 {
+                        fight.isMainTimerRunning = false
+                    }
                 }
             }
             .sheet(isPresented: $showSetTimerAlert,

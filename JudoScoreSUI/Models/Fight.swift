@@ -25,7 +25,6 @@ import SwiftUI
     var fighter1: Fighter
     var fighter2: Fighter
     var victoryData: VictoryData? = nil
-    var isTimerFinished: Bool = false
     var isVictoryPossible: Bool {
         return fighter1.isHansokumake
             || fighter2.isHansokumake
@@ -33,7 +32,7 @@ import SwiftUI
             || fighter2.isForfeit
             || fighter1.isIppon
             || fighter2.isIppon
-            || isTimerFinished
+            || mainTimerRemainingTime == 0
     }
     
     init(fighter1: Fighter, fighter2: Fighter) {
